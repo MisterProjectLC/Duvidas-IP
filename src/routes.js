@@ -23,7 +23,7 @@ router.get('/search', function(req,res){
     res.sendFile(path.resolve(__dirname+'/../view/search.html'))
 })
 
-router.post('/getQuestion',function(req,res){
+router.post('/getQuestion',function(req,res) {
 
     let  regex = /[a-zA-Z]{2}\-[a-zA-Z]{4}\-\d{4}?$/;
 
@@ -69,13 +69,7 @@ router.post('/getQuestion',function(req,res){
     
 })
 
-router.post('/post', async (req, res, next) => {
-
-    console.log("body titulo");
-    console.log(req.body.titulo);
-    console.log("data titulo");
-    console.log(req.data.titulo);
-
+router.post('/post', async (req, res) => {
     let keyValores = ['ra','duvida'];
     let maxSize = [6,6000]
 
@@ -146,7 +140,7 @@ router.post('/post', async (req, res, next) => {
 })
 
 //Callback function called after the INSERT of a question is done
-function returnProtocol(res, protocol){
+function returnProtocol(res, protocol) {
     //If the protocol returned was -1 it means that the submitting has failed
     if(protocol==-1)
         res.send({res:0})
