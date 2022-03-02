@@ -10,7 +10,7 @@ function checkValues(){
      }
 
     grecaptcha.ready(function(){
-        grecaptcha.execute('6LciAcEbAAAAAGU4y3suBMuJlNDwbLIChEsnlYKb', {action: 'submit'}).then(function(token){
+        grecaptcha.execute('6LdODK0eAAAAAAdhNCOC3dloI073ELf3vSCw1ERP', {action: 'submit'}).then(function(token){
             sendQuestion(protocol,token)
         })
     })
