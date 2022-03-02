@@ -3,66 +3,14 @@ var formSubmitting = true;
 //Array containing all exercises count
 var arrayEx;
 
-const listas = document.getElementById("Lista");
-
-loadLists();
-
-var select = document.getElementById("Lista");
-var choiceSelected = select.value;
-
 //If there's info from the previous question saved in cache, load it into the form
 let info = ["RA","contato"];
 info.forEach(loadStoredInfo);
 
-//Gets all active lists from the database 
-function loadLists(){
-    $.ajax({
-        url: "/getEXList",
-        dataType: "json",
-        type: "post",
-        success:function(result){
-
-            let exercises = result.listsEx;
-            arrayEx = exercises.EXs;
-
-            loadCurrentLists(exercises.lists);
-
-            loadCurrentExercises(0)
-        }
-    })
-}
-
-select.addEventListener('change', (event) => {
-    loadCurrentExercises(listas.value);
-})
-
-//Puts all lists into a Select input
-function loadCurrentLists(lists){
-    var select = document.getElementById("Lista");
-    for(var i=0;lists[i]!=undefined;i++){
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = lists[i];
-        select.appendChild(opt);
-    }
-}
-
-//Define the amount of exercises that are on a certain list
-function loadCurrentExercises(lista){
-    $("#Exercicios").empty();
-    select = document.getElementById("Exercicios");
-    for(var i=0;i<arrayEx[lista];i++){
-        var opt = document.createElement('option');
-        opt.value = i+1;
-        opt.innerHTML = i+1;
-        select.appendChild(opt);
-    }
-}
-
 //Prepares to submit the form, checking all fields and validating the captcha
 function submitForm() {
 
-    fields = ["RA","Lista","Exercicios","duvida"]
+    fields = ["RA","duvida"]
     if(!checkFields(fields)){
         return
     }
@@ -91,8 +39,6 @@ function sendValues(token){
             ra: getElement("RA"),
             titulo: getElement("titulo"),
             contato: getElement("contato"),
-            lista : $('#Lista').find(":selected").text(),
-            ex: getElement("Exercicios"),
             duvida: getElement("duvida"),
             captcha: token
         },

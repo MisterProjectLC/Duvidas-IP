@@ -3,9 +3,9 @@ const query = require("./db_query");
 //Inserts a question on the database
 function insertQuestion(values = {},callback){
     const idgen = require("./id_generator");
-    var id = idgen({prefix:"IP"});
-    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,lista,ex,status,titulo,email) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);",
-    [id,values.ra,values.nome,values.contato,values.duvida,values.lista,values.ex,0,values.titulo,values.email]).then(data => {
+    var id = idgen({prefix:"ORI"});
+    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,status,titulo,email) values ($1,$2,$3,$4,$5,$6,$7,$8);",
+    [id,values.ra, values.nome, values.contato, values.duvida, 0, values.titulo, values.email]).then(data => {
         if(data==-1)
             callback (values.res, -1);
         else
@@ -15,7 +15,7 @@ function insertQuestion(values = {},callback){
 
 //Retrieves questions based on the given RA
 function retrieveQuestions(values = {},callback){
-    query("SELECT id, status, date, lista, ex FROM tb_duvidas WHERE ra=$1",[values.ra]).then(data => {
+    query("SELECT id, status, date FROM tb_duvidas WHERE ra=$1",[values.ra]).then(data => {
         if(data==-1)
             callback(-1);
         else
@@ -30,22 +30,6 @@ function retrieveQuestionData(values = {}, callback){
             callback(values.res, -1);
         else
             callback(values.res, data.rows[0])
-    })
-}
-
-function retrievetListEx(values = {},callback){
-
-    query("select * from tb_listas WHERE ativa=true ORDER BY id ASC;").then(data => {
-        if(data==-1){
-            callback(values.res, -1);
-        }else{
-            let listsEx = {
-                lists: (data.rows).map(item => item.id),
-                EXs: (data.rows).map(item => item.ex)
-            }
-
-            callback(values.res, listsEx);
-        } 
     })
 }
 
@@ -66,7 +50,7 @@ async function getUserByRA(values = {}){
 module.exports =  async function opManager(values = {}, callback){
     switch(values.op){
         case 1:
-            if(values.ra!="" && values.nome!="" && values.duvida!="" && values.lista!="" && values.ex!="")
+            if(values.ra!="" && values.nome!="" && values.duvida!="")
                 insertQuestion(values,callback);
             else return -1;
             break;
@@ -80,9 +64,6 @@ module.exports =  async function opManager(values = {}, callback){
                 retrieveQuestionData(values,callback)
             else
                 return -1;
-            break;
-        case 4:
-            retrievetListEx(values,callback);
             break;
         case 5:
             if(values.ra)
