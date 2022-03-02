@@ -42,8 +42,8 @@ function sendValues(token){
             duvida: getElement("duvida"),
             captcha: token
         },
-        success:function(result){
-            if(result.res){
+        success: function(result) {
+            if (result.res) {
                 document.getElementById("protocolText").innerHTML = result.protocol;
                 formSubmitting = true
     
@@ -54,11 +54,11 @@ function sendValues(token){
                 cardSucesso.style.display = "block"
                 card.style.display = "none"
     
-            }else{
-                if(result.ra)
+            } else {
+                if (result.ra)
                     alert("Ocorreu um erro verificando seu RA! Confira-o e tente novamente.")
                 //If captcha was the problem, inform the user of it
-                else if(result.captcha)
+                else if (result.captcha)
                     alert("Não foi possível verificar o Captcha! Tente novamente mais tarde.")
                 else
                     alert("Um erro ocorreu! Tente novamente mais tarde.")
@@ -195,33 +195,4 @@ function copyProtocol(){
     area.select();
 
     document.execCommand('copy');
-}
-
-//Switches the question type from Dúvida to Tutoria and vice-versa
-function switchQuestionType(id){
-
-    $(".switches").fadeTo(100,"0.4");
-    $(".switches").attr("onclick","switchQuestionType(this.id)");
-    $(".switches").css("cursor","pointer");
-
-    $("#"+id).attr("onclick","");
-    $("#"+id).fadeTo(100,"1");
-    $("#"+id).css("cursor","default");
-    if(id=="switchDuvida"){
-        $(".col-sm-2").fadeIn(200)
-        $("#Lista option[value=-1]").remove();
-        $("#Exercicios option[value=-1]").remove();
-        loadCurrentExercises(0);
-    }
-    else{
-        $("#switchDuvida").attr("onclick","");
-        $(".col-sm-2").fadeOut(200, function(){
-            $("#Lista").append('<option value=-1>-1</option>')
-            $("#Lista").val(-1).change();
-            $("#Exercicios").append('<option value=-1>-1</option>')
-            $("#Exercicios").val(-1).change();
-            $("#switchDuvida").attr("onclick","switchQuestionType(this.id)");
-        })
-    }
-
 }

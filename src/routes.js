@@ -69,12 +69,12 @@ router.post('/getQuestion',function(req,res){
     
 })
 
-router.post('/post', async function(req,res,next){
+router.post('/post', async function(req, res, next){
 
-    let keyValores = ['ra','duvida','lista','ex'];
-    let maxSize = [6,6000,2,2]
+    let keyValores = ['ra','duvida'];
+    let maxSize = [6,6000]
 
-    for(let x=0;x<keyValores.length;x++){
+    for(let x = 0; x < keyValores.length; x++) {
         if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>maxSize[x]){
             res.send({res:0});
             return;
@@ -83,18 +83,23 @@ router.post('/post', async function(req,res,next){
 
     let dados = await dbmanager({op:5,ra:req.body.ra}, ()=>{})
 
+    console.log("body titulo");
+    console.log(req.body.titulo);
+    console.log("data titulo");
+    console.log(req.data.titulo);
+
     if(dados===undefined || dados==-1){
         res.send({ra:1})
         return;
     }   
     let {nome, email} = dados;
 
-    if(req.body["titulo"].length>60){
+    if(req.body["titulo"].length > 60){
         res.send({res:0});
         return;
     }
 
-    if(req.body["contato"].length>40){
+    if(req.body["contato"].length > 40){
         res.send({res:0})
         return;
     }
@@ -127,8 +132,6 @@ router.post('/post', async function(req,res,next){
                 nome: nome,
                 contato: req.body.contato,
                 duvida: req.body.duvida,
-                lista: req.body.lista,
-                ex: req.body.ex,
                 titulo: req.body.titulo,
                 email: email,
                 res: resOri
@@ -140,11 +143,6 @@ router.post('/post', async function(req,res,next){
     })
     
     
-})
-router.post('/getEXList',function(req,res,next){
-
-    dbmanager({op: 4, res: res},returnListsEx);
-
 })
 
 //Callback function called after the INSERT of a question is done
