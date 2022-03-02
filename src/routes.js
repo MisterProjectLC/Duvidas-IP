@@ -69,7 +69,7 @@ router.post('/getQuestion',function(req,res){
     
 })
 
-router.post('/post', (req, res, next) => {
+router.post('/post', async (req, res, next) => {
 
     console.log("body titulo");
     console.log(req.body.titulo);
