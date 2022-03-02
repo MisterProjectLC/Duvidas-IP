@@ -18,7 +18,7 @@ function submitForm() {
     document.getElementById("sendBtn").innerHTML = "<i id='spinner' class='fa fa-refresh fa-spin' ></i>"
 
     grecaptcha.ready(function(){
-        grecaptcha.execute('6LdODK0eAAAAAHZT4XlteTVeJoWEU1AP094fNGLL', {action: 'submit'}).then(function(token){
+        grecaptcha.execute('6Ldub60eAAAAAE6OtVOpHf-Vo6WTVXyibitll_3M', {action: 'submit'}).then(function(token){
             sendValues(token)
         })
     })
