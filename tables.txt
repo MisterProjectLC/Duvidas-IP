@@ -1,0 +1,5 @@
+CREATE TABLE tb_duvidas (id VARCHAR(13) PRIMARY KEY, ra VARCHAR(6),nome VARCHAR(40), contato VARCHAR(40), duvida TEXT, lista VARCHAR(2), ex VARCHAR(2), status integer, date timestamp DEFAULT current_timestamp, comentario TEXT, monitor VARCHAR(20), titulo TEXT);
+
+create table tb_listas (id SERIAL PRIMARY KEY, ex integer, ativa boolean);
+
+CREATE TABLE tb_users(ra text PRIMARY KEY, nome text, email text);
