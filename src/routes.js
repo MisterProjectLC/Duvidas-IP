@@ -71,11 +71,16 @@ router.post('/getQuestion',function(req,res){
 
 router.post('/post', async function(req, res, next){
 
+    console.log("body titulo");
+    console.log(req.body.titulo);
+    console.log("data titulo");
+    console.log(req.data.titulo);
+
     let keyValores = ['ra','duvida'];
     let maxSize = [6,6000]
 
     for(let x = 0; x < keyValores.length; x++) {
-        if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length>maxSize[x]){
+        if(req.body[keyValores[x]] === null || req.body[keyValores[x]] === undefined || req.body[keyValores[x]].length > maxSize[x]) {
             res.send({res:0});
             return;
         }
@@ -83,29 +88,24 @@ router.post('/post', async function(req, res, next){
 
     let dados = await dbmanager({op:5,ra:req.body.ra}, ()=>{})
 
-    console.log("body titulo");
-    console.log(req.body.titulo);
-    console.log("data titulo");
-    console.log(req.data.titulo);
-
-    if(dados===undefined || dados==-1){
+    if(dados===undefined || dados==-1) {
         res.send({ra:1})
         return;
     }   
     let {nome, email} = dados;
 
-    if(req.body["titulo"].length > 60){
+    if(req.body["titulo"].length > 60) {
         res.send({res:0});
         return;
     }
 
-    if(req.body["contato"].length > 40){
+    if(req.body["contato"].length > 40) {
         res.send({res:0})
         return;
     }
 
     //If the captcha is not done, return an error to the user
-    if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null){
+    if(req.body.captcha === undefined || req.body.captcha === '' || req.body.captcha === null) {
         res.send({res:0,captcha:1});
         return;
     }
