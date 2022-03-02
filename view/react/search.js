@@ -1,29 +1,12 @@
 const config = require("../../src/config");
 
-class Main extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { lang: 0, language:"English", dropdownMenu: false };
-        this.languageClicked = this.languageClicked.bind(this);
-        this.sandwichClicked = this.sandwichClicked.bind(this);
-        this.mapProjects = this.mapProjects.bind(this);
         console.log("Heroku app");
     }
 
     componentDidMount() {
-        $('#language').on('click', this.languageClicked);
-        $('#languageDropdown').on('click', this.languageClicked);
-        $('#sandwich').on('click', this.sandwichClicked);
-
-        $(window).resize(function() {
-            let aspect_ratio = $(window).width()/$(window).height();
-            if (aspect_ratio > 11/7) {
-                $("#links a").css("opacity", "100%");
-            } else {
-                $("#links a").css("opacity", "0%");
-            }
-            $("#languageDropdown").css("opacity", "0%");
-        });
     }
 
     render() {
@@ -94,4 +77,4 @@ class Main extends React.Component {
     }
 }
 
-ReactDOM.render(<Main/>, document.getElementById('start'))
+ReactDOM.render(<Search/>, document.getElementById('start'))
