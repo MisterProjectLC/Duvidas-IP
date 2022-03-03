@@ -1,0 +1,15 @@
+# Allow database acess
+NODE_TLS_REJECT_UNAUTHORIZED = 0
+
+DB_USER='zwykxkxofkjtcz'
+DB_HOST='ec2-52-4-111-46.compute-1.amazonaws.com'
+DB_DATABASE ='danosogppvoua1'
+DB_PASSWORD = 'b2112b916f83503e3b89b54c6e1de59614e87d4580c6fe2ff9dca6c6bba5fb97'
+DB_PORT = 5432
+
+DATABASE_URL = postgres://zwykxkxofkjtcz:b2112b916f83503e3b89b54c6e1de59614e87d4580c6fe2ff9dca6c6bba5fb97@ec2-52-4-111-46.compute-1.amazonaws.com:5432/danosogppvoua1
+
+CAPTCHA_KEY = '6Lc3ta8bAAAAAPZyamueDS9NCYmH_NHJSHskgLCt'
+
+
+CAPTCHA_V3_KEY = '6LciAcEbAAAAAAHF_Vmxt8I7Tb9vj1lodOuQsvSL'

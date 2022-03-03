@@ -43,6 +43,7 @@ function sendValues(token){
             captcha: token
         },
         success: function(result) {
+            console.log(result);
             if (result.res) {
                 document.getElementById("protocolText").innerHTML = result.protocol;
                 formSubmitting = true
@@ -62,11 +63,11 @@ function sendValues(token){
                     alert("Não foi possível verificar o Captcha! Tente novamente mais tarde.")
                 else
                     alert("Um erro ocorreu! Tente novamente mais tarde.")
-                document.getElementById("sendBtn").innerHTML= "Enviar Questão"
+                document.getElementById("sendBtn").innerHTML = "Enviar Questão"
             }
         },
         complete:function(result){
-            document.getElementById("sendBtn").innerHTML= "Enviar Questão"
+            document.getElementById("sendBtn").innerHTML = "Enviar Questão"
         }
     })
 
@@ -178,7 +179,7 @@ window.onload = function() {
             return undefined;
         }
 
-        var confirmationMessage = 'It looks like you have been editing something. '
+        var confirmationMessage = 'It looks like you were editing something. '
                                 + 'If you leave before saving, your changes will be lost.';
 
         (e || window.event).returnValue = confirmationMessage; //Gecko + IE
