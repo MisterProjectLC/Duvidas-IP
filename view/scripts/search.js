@@ -1,8 +1,8 @@
 function checkValues(){
 
-    let  regex = /[a-zA-Z]{2}\-[a-zA-Z]{4}\-\d{4}?$/;
+    let regex = /[a-zA-Z]{3}\-[a-zA-Z]{4}\-\d{4}?$/;
 
-    let  protocol = document.getElementById("protocol").value;
+    let protocol = document.getElementById("protocol").value;
 
      if(!regex.test(protocol)){
          alert("Protocolo inválido!")
