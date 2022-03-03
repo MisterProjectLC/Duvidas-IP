@@ -4,8 +4,8 @@ const query = require("./db_query");
 function insertQuestion(values = {},callback){
     const idgen = require("./id_generator");
     var id = idgen({prefix:"ORI"});
-    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,status,titulo,email) values ($1,$2,$3,$4,$5,$6,$7,$8);",
-    [id,values.ra, values.nome, values.contato, values.duvida, 0, values.titulo, values.email]).then(data => {
+    query("INSERT INTO tb_duvidas (id,ra,nome,contato,duvida,status,titulo) values ($1,$2,$3,$4,$5,$6,$7);",
+    [id,values.ra, values.nome, values.contato, values.duvida, 0, values.titulo]).then(data => {
         if(data==-1)
             callback (values.res, -1);
         else
