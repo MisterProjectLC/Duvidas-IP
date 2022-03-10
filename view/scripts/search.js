@@ -79,7 +79,7 @@ function loadBox(qs){
             status.style.color = "#DB4437"
             break;
         case 1:
-            if(qs.monitor){
+            if(qs.monitor) {
                 status.innerText = "Respondida"
                 status.style.color = "#0F9D58"
             }else{
